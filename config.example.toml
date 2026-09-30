@@ -1,0 +1,38 @@
+# Copy to config.toml and fill in. Path can be overridden with HOMEPLANNER_CONFIG.
+
+# Family calendar ID: Google Calendar > Settings > Family > "Integrate calendar"
+calendar_id = "your-family-calendar-id@group.calendar.google.com"
+timezone = "America/Los_Angeles"
+# Google service account key (see docs/google-setup.md). Keep this file only on the Pi.
+# Default: ~/.config/homeplanner/service-account.json in the home folder of the user running
+# HomePlanner, so you don't need this line. Uncomment only to keep the key somewhere else.
+# service_account_file = "~/.config/homeplanner/service-account.json"
+# Where the last synced events are saved for offline boot (relative to the working dir).
+cache_dir = "cache"
+# Where your external calendars list and remote-access PIN are kept (relative to the working dir).
+data_dir = "data"
+
+# Google event colors: 1 Lavender, 2 Sage, 3 Grape, 4 Flamingo, 5 Banana, 6 Tangerine,
+# 7 Peacock, 8 Graphite, 9 Blueberry, 10 Basil, 11 Tomato
+# Optional: a different color on the wall only, from Google's full 24-color calendar palette
+# (radicchio, cherry-blossom, pumpkin, mango, citron, avocado, pistachio, eucalyptus, cobalt,
+# wisteria, amethyst, cocoa, birch, or any event color name). Phones keep showing color_id.
+#   display_color = "cherry-blossom"
+[[members]]
+name = "Alex"
+color_id = "9"
+
+[[members]]
+name = "Sam"
+color_id = "11"
+
+[weather]
+latitude = 47.61
+longitude = -122.33
+temperature_unit = "fahrenheit"   # or "celsius"
+
+[sleep]
+off = "22:00"          # screen off at
+on = "06:30"           # screen on at
+wake_minutes = 5       # stay on this long after key/mouse input while asleep
+output = "HDMI-A-1"    # wlr-randr output name

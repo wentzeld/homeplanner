@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HomePlanner settings</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="page">
+  <header class="page-head">
+    <a href="/" class="button-link">← Calendar <span class="key-hint">(Esc)</span></a>
+    <h1>Settings</h1>
+  </header>
+
+  <main class="settings">
+    <section class="card">
+      <h2>Other calendars</h2>
+      <p class="muted">
+        Add public calendars, like your school's or sports club's. Paste their iCal link
+        (it usually ends in <code>.ics</code> or starts with <code>webcal://</code>).
+      </p>
+      <ul id="calendar-list" class="calendar-list"></ul>
+      <p id="no-calendars" class="muted" hidden>No other calendars yet.</p>
+
+      <form id="add-calendar" class="add-calendar" novalidate>
+        <h3>Add a calendar</h3>
+        <label class="field">
+          <span>Name</span>
+          <input name="name" maxlength="60" required autocomplete="off" placeholder="e.g. Lincoln Elementary">
+        </label>
+        <label class="field">
+          <span>Link</span>
+          <input name="url" type="url" required autocomplete="off" placeholder="https://… or webcal://…">
+        </label>
+        <label class="field">
+          <span>Color</span>
+          <span class="color-pick">
+            <i id="color-swatch"></i>
+            <select name="color_id" id="color-select"></select>
+          </span>
+        </label>
+        <p id="add-message" class="form-message" role="status" hidden></p>
+        <button type="submit" class="primary" id="add-button">Add calendar</button>
+      </form>
+
+      <p class="muted tip">
+        <b>On your own phone:</b> use <b>Copy link</b>, then in Google Calendar on a computer choose
+        <i>Other calendars → + → From URL</i> and paste it.
+      </p>
+    </section>
+
+    <section class="card" id="remote-section" hidden>
+      <h2>Use HomePlanner from phones &amp; laptops</h2>
+      <div id="remote-display-only" hidden>
+        <p id="remote-status"></p>
+        <form id="pin-form" class="pin-form" novalidate>
+          <label class="field">
+            <span id="pin-label">New PIN (6–8 digits)</span>
+            <input name="pin" type="password" inputmode="numeric" maxlength="8" autocomplete="off">
+          </label>
+          <label class="field">
+            <span>Type it again</span>
+            <input name="pin2" type="password" inputmode="numeric" maxlength="8" autocomplete="off">
+          </label>
+          <button type="submit" class="primary" id="pin-button">Set PIN</button>
+        </form>
+        <p id="pin-message" class="form-message" role="status" hidden></p>
+        <div class="actions-row" id="remote-actions" hidden>
+          <button type="button" id="signout-all">Sign out all devices</button>
+          <button type="button" id="disable-remote">Turn off remote access</button>
+        </div>
+      </div>
+      <div id="remote-signed-in" hidden>
+        <p>You're signed in on this device.</p>
+        <button type="button" id="logout">Sign out this device</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/settings.js"></script>
+</body>
+</html>

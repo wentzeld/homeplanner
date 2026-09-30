@@ -1,0 +1,25 @@
+# Python / tooling
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+
+# Your settings and secrets - never commit these
+config.toml
+.env
+*service-account*.json
+# Google downloads keys as <project>-<id>.json; nothing else lives at the repo root as JSON.
+/*.json
+
+# App data and caches (calendars list, PIN hash, saved events)
+data/
+cache/
+*.tmp
+
+# OS / editor clutter
+.DS_Store
+.idea/
+.vscode/

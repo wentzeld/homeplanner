@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HomePlanner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="clock">
+      <div id="time" class="time"></div>
+      <div id="date" class="date"></div>
+    </div>
+    <div id="current-weather" class="current-weather"></div>
+    <nav class="nav">
+      <button id="prev" type="button" title="Previous week (←)">◀</button>
+      <button id="today" type="button" title="This week (T)">Today</button>
+      <button id="next" type="button" title="Next week (→)">▶</button>
+      <button id="next-week" type="button" title="Next week (W)">Next week</button>
+      <button id="add" type="button" class="primary" title="Add event (N)">+ Add event</button>
+      <a id="settings" href="/settings" class="button-link" title="Settings (S)" aria-label="Settings">⚙</a>
+    </nav>
+  </header>
+
+  <div id="range-label" class="range-label"></div>
+  <main id="days" class="days"></main>
+
+  <footer class="footer">
+    <div id="legend" class="legend"></div>
+    <div class="hints">← → weeks · W next week · T today · N add · Tab/Enter open · R refresh · S settings</div>
+    <button id="sync" type="button" class="sync" title="Refresh now (R)"></button>
+  </footer>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <dialog id="add-dialog">
+    <form id="add-form" novalidate>
+      <h2 id="form-title">Add family event</h2>
+
+      <label class="field wide">
+        <span>Title</span>
+        <input name="title" required maxlength="200" autocomplete="off" placeholder="e.g. Soccer practice">
+      </label>
+
+      <label class="field">
+        <span>Date</span>
+        <input name="date" type="date" required>
+      </label>
+
+      <label class="field check">
+        <input name="all_day" type="checkbox">
+        <span>All day</span>
+      </label>
+
+      <label class="field time-field">
+        <span>Start</span>
+        <input name="start_time" type="time" step="300">
+      </label>
+
+      <label class="field time-field">
+        <span>End</span>
+        <input name="end_time" type="time" step="300">
+      </label>
+
+      <label class="field">
+        <span>Who</span>
+        <select name="member" id="member-select">
+          <option value="">Whole family</option>
+        </select>
+      </label>
+
+      <label class="field repeat-field">
+        <span>Repeat</span>
+        <select name="recurrence">
+          <option value="none">Does not repeat</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+      </label>
+
+      <p id="guest-note" class="field wide guest-note" hidden>
+        Created by someone else. Only they can change the title, time or place, but you can change who it's for.
+      </p>
+
+      <p id="custom-repeat-note" class="field muted" hidden>
+        Repeat: custom (kept as is; change it in Google Calendar)
+      </p>
+
+      <p id="span-note" class="field muted" hidden></p>
+
+      <label class="field repeat-until" hidden>
+        <span>Repeat until (optional)</span>
+        <input name="recurrence_until" type="date">
+      </label>
+
+      <label class="field wide">
+        <span>Location</span>
+        <input name="location" autocomplete="off">
+      </label>
+
+      <label class="field wide">
+        <span>Notes</span>
+        <textarea name="description" rows="3"></textarea>
+      </label>
+
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+
+      <div class="actions wide">
+        <button type="button" id="cancel">Cancel (Esc)</button>
+        <button type="submit" class="primary" id="save">Save (Enter)</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="event-dialog">
+    <div class="event-details">
+      <div class="detail-head">
+        <i id="detail-color" class="dot"></i>
+        <h2 id="detail-title"></h2>
+      </div>
+      <p id="detail-when"></p>
+      <p id="detail-repeat" class="muted" hidden>↻ Repeating event</p>
+      <p id="detail-who"></p>
+      <p id="detail-location" hidden></p>
+      <p id="detail-notes" class="detail-notes" hidden></p>
+      <p id="detail-note" class="muted" hidden></p>
+
+      <div id="scope-choice" class="scope-choice" hidden>
+        <span id="scope-question"></span>
+        <button type="button" data-scope="this">This event</button>
+        <button type="button" data-scope="all">All events</button>
+      </div>
+
+      <p id="detail-error" class="form-error" role="alert" hidden></p>
+
+      <div class="actions">
+        <button type="button" id="detail-delete" class="danger">Delete</button>
+        <button type="button" id="detail-edit" class="primary">Edit</button>
+        <button type="button" id="detail-close">Close (Esc)</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
